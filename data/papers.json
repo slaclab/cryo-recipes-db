@@ -100,7 +100,7 @@
     "notes": "-",
     "sample_preparation": {
       "affinity_tag_terminus": "GFP (C)",
-      "expression_organism": "HEK293 GnTI\u00af",
+      "expression_organism": "HEK293 GnTI-",
       "extraction_parameters": "2 h, 4 C",
       "composition_of_final_stabilizer": "DDM, CHS",
       "extraction_concentration": "1%",
@@ -572,7 +572,7 @@
   {
     "grid_preparation": {
       "grid_protein_concentration": 2,
-      "details": "CF-1.2/1.3\u20134C",
+      "details": "CF-1.2/1.3",
       "comments": "-"
     },
     "helices_tmd_oligomer": 19,
@@ -963,7 +963,7 @@
       "initial_purification": "Anion exchange",
       "final_purification": "Superose 6",
       "purification_details": "-",
-      "extraction_method": "tPCC-\u03b1-M",
+      "extraction_method": "tPCC-alpha-M",
       "stabilizer_exchange": "Yes"
     },
     "gene": "F1F0-ATPase"
@@ -1058,7 +1058,7 @@
       "detector": "K2",
       "energy_filter": "Yes",
       "total_exposure_time": 10,
-      "pixel_size": "1.23\u00c5",
+      "pixel_size": "1.23",
       "software": "RELION"
     },
     "native_source": "Saccharomyces cerevisiae",
@@ -1199,7 +1199,7 @@
   {
     "grid_preparation": {
       "grid_protein_concentration": 2,
-      "details": "Homemade - 500\u2013800 nm hole size",
+      "details": "Homemade - 500-800 nm hole size",
       "comments": "-"
     },
     "helices_tmd_oligomer": 48,
@@ -1411,7 +1411,7 @@
     "notes": "-",
     "sample_preparation": {
       "affinity_tag_terminus": "GFP (C)",
-      "expression_organism": "HEK293 GnTI\u00af",
+      "expression_organism": "HEK293 GnTI-",
       "extraction_parameters": "-",
       "composition_of_final_stabilizer": "DDM, CHS",
       "extraction_concentration": "1%, 0.1%",
@@ -1468,7 +1468,7 @@
     "notes": "-",
     "sample_preparation": {
       "affinity_tag_terminus": "GFP (C)",
-      "expression_organism": "HEK293 GnTI\u00af",
+      "expression_organism": "HEK293 GnTI-",
       "extraction_parameters": "-",
       "composition_of_final_stabilizer": "DDM, CHS",
       "extraction_concentration": "1%, 0.2%",
@@ -1712,7 +1712,7 @@
   {
     "grid_preparation": {
       "grid_protein_concentration": 2.5,
-      "details": "C-flat Cu CF-1.2/1.3 400",
+      "details": "CF-1.2/1.3 Cu 400",
       "comments": "-"
     },
     "helices_tmd_oligomer": 44,
@@ -2494,7 +2494,7 @@
     "notes": "-",
     "sample_preparation": {
       "affinity_tag_terminus": "GFP, StrepII, His-8 (C)",
-      "expression_organism": "HEK293 GnTI\u00af",
+      "expression_organism": "HEK293 GnTI-",
       "extraction_parameters": "30 min, 4 C",
       "composition_of_final_stabilizer": "Digitonin",
       "extraction_concentration": "1%",
@@ -2659,7 +2659,7 @@
     },
     "native_source": "Homo sapiens",
     "final_stabilizer": "detergent",
-    "in_complex_with": "\u03b21",
+    "in_complex_with": "beta-1",
     "monomer_tmd_helices": 24,
     "name": "-",
     "notes": "-",
@@ -3137,7 +3137,7 @@
   {
     "grid_preparation": {
       "grid_protein_concentration": 0.3,
-      "details": "CF-1.2/1.3\u20132Au 200",
+      "details": "CF-1.2/1.3 Au 200",
       "comments": "in-house gold coating"
     },
     "helices_tmd_oligomer": 24,
@@ -3194,7 +3194,7 @@
   {
     "grid_preparation": {
       "grid_protein_concentration": 0.5,
-      "details": "CF-1.2/1.3\u20132Au 200",
+      "details": "CF-1.2/1.3 Au 200",
       "comments": "in-house gold coating"
     },
     "helices_tmd_oligomer": 24,
@@ -3980,7 +3980,7 @@
       "extraction_parameters": "-",
       "composition_of_final_stabilizer": "MSP2N2, Soy bean PL",
       "extraction_concentration": "0.5 mM, 0.1 mg/ml",
-      "final_concentration_or_ratio": "1:1:150\u20131:1.5:225",
+      "final_concentration_or_ratio": "1:1:150-1:1.5:225",
       "initial_purification": "Amylose",
       "final_purification": "Superose 6",
       "purification_details": "-",
@@ -4084,7 +4084,7 @@
     },
     "native_source": "Electrophorus electricus",
     "final_stabilizer": "detergent",
-    "in_complex_with": "\u03b21",
+    "in_complex_with": "beta1",
     "monomer_tmd_helices": 24,
     "name": "-",
     "notes": "-",
@@ -6484,7 +6484,7 @@
     "notes": "-",
     "sample_preparation": {
       "affinity_tag_terminus": "EGFP, His-8 (C)",
-      "expression_organism": "HEK293 GnTI\u00af",
+      "expression_organism": "HEK293 GnTI-",
       "extraction_parameters": "2 h, 4 C",
       "composition_of_final_stabilizer": "DDM, CHS",
       "extraction_concentration": "1%",
@@ -6728,7 +6728,7 @@
   {
     "grid_preparation": {
       "grid_protein_concentration": 4,
-      "details": "CF-1.2/1.3\u20132 Au 200",
+      "details": "CF-1.2/1.3 Au 200",
       "comments": "coated with gold"
     },
     "helices_tmd_oligomer": 12,
@@ -6785,7 +6785,7 @@
   {
     "grid_preparation": {
       "grid_protein_concentration": 5,
-      "details": "CF-1.2/1.3\u20132Au 200",
+      "details": "CF-1.2/1.3 Au 200",
       "comments": "coated with gold"
     },
     "helices_tmd_oligomer": 16,
@@ -8365,7 +8365,7 @@
     "notes": "-",
     "sample_preparation": {
       "affinity_tag_terminus": "His",
-      "expression_organism": "E. coli C43(DE3) \u0394acrAB",
+      "expression_organism": "E. coli C43(DE3) delta-acrAB",
       "extraction_parameters": "3 h, 4 C",
       "composition_of_final_stabilizer": "A8-35",
       "extraction_concentration": "1.50%",
