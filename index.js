@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const git = require('nodegit');
+//const git = require('nodegit');
 const path = require('path');
 const app = express();
 const fs = require('fs');
@@ -17,14 +17,15 @@ const config = {
 };
 
 // just read into mem
-const repoUrl = "git@github.com:slaclab/cryo-recipes.git";
+const repoUrl = "git@github.com:slaclab/cryo-recipes-db.git";
 const repoPath = "/tmp/master/";
-const dbPath = 'public/papers.json';
+const dbPath = 'data/papers.json';
 
 // set the ssh key to use
-const ssh_key=process.env.SSH_KEY;
-console.log( "Using ssh key at "  + ssh_key );
-process.env.GIT_SSH_COMMAND = "ssh -i " + ssh_key
+//const ssh_key=process.env.SSH_KEY;
+console.log( "Using "  + process.env.GIT_SSH_COMMAND );
+exec( "git --version" );
+//process.env.GIT_SSH_COMMAND = "ssh -i " + ssh_key
 
 
 // helper functions
@@ -61,7 +62,7 @@ var rmdir = ( dir ) => {
 // grab newest db from repoUrl and read into memory
 console.log("Cloning " + repoUrl + " to " + repoPath );
 rmdir( repoPath );
-// var repo = git.Clone( repoUrl, repoPath, {} )
+//var repo = git.Clone( repoUrl, repoPath, {} )
 // .then( (repo) => {
 // 	console.log("cloned!");
 // 	const repoDbPath = repoPath + dbPath;
@@ -77,12 +78,11 @@ rmdir( repoPath );
 exec( "git clone " + repoUrl + " " + repoPath);
 const repoDbPath = repoPath + dbPath;
 const db = JSON.parse(fs.readFileSync( repoDbPath, 'utf8', (err) => {
-	if (err) { console.err(err); process.exit(255); }
+	if (err) { 
+    console.err(err); 
+    process.exit(255);
+  }
 }));
-console.log("Ready...")
-
-// exec( 'git config user.name "author"' );
-// exec( 'git config user.email "author@somewhere.org"' );
 
 // express settings
 app.use(bodyParser.json());
@@ -90,8 +90,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 
+// start server
+app.listen(config.port, config.host, (e)=> {
+  if(e) {
+    throw new Error('Internal Server Error');
+  }
+  console.log("Ready...")
+});
+
+
+
 // list all papers
-app.get('/papers', (req, res) => {
+app.get('/api/papers.json', (req, res) => {
 	// console.log( papersData );
 	res.send( db );
 })
@@ -112,6 +122,7 @@ var create_pr = ( branchName, newdb ) => {
 	fs.createWriteStream(newdbPath).write( JSON.stringify(newdb, null, 2) );
 
 	// commit changes
+  exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
 	exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
 	// hmm.. need different auth for hub
 	// exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
@@ -123,7 +134,7 @@ var create_pr = ( branchName, newdb ) => {
 }
 
 // add new paper 
-app.put('/paper/new', (req, res) => {
+app.put('/api/paper/new', (req, res) => {
 	const item = req.body;
 	console.log(item);
 	
@@ -141,13 +152,13 @@ app.put('/paper/new', (req, res) => {
 })
 
 // get single paper
-app.get('/paper/:id', (req, res) => {
+app.get('/api/paper/:id', (req, res) => {
 	const id = req.params.id;
 	res.send(db[id]);
 })
 
 
-app.post( '/paper/:id', (req, res) => {
+app.post( '/api/paper/:id', (req, res) => {
 
 	var id = req.params.id;
 
@@ -195,11 +206,4 @@ app.post( '/paper/:id', (req, res) => {
 //
 // })
 
-
-// start server
-app.listen(config.port, config.host, (e)=> {
-    if(e) {
-        throw new Error('Internal Server Error');
-    }
-});
 
