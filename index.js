@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const app = express();
-const fs = require('fs');
 const fse = require('fs-extra');
 const exec = require('child_process').execSync;
 const os = require('os');
@@ -24,27 +23,25 @@ const dbPath = 'data/papers.json';
 console.log( "Using "  + process.env.GIT_SSH_COMMAND );
 exec( "git --version" );
 
-
-// helper functions
-var rmdir = ( dir ) => {
-  // console.log( 'removing ' + dir );
-  fs.rmdirSync( dir, {recursive:true}, (err) => {
-    if (err) { console.error(err); }
-  })  
-};
-
 // grab newest db from repoUrl and read into memory
 console.log("Cloning " + repoUrl + " to " + repoPath );
-rmdir( repoPath );
-
-exec( "git clone " + repoUrl + " " + repoPath);
 const repoDbPath = repoPath + dbPath;
-const db = JSON.parse(fs.readFileSync( repoDbPath, 'utf8', (err) => {
-  if (err) { 
-    console.err(err); 
+var db = null;
+fse.remove( repoPath )
+.then( () => {
+  console.log('getting current version of database...');
+  exec( "git clone " + repoUrl + " " + repoPath);
+  // read db into mem
+  fse.readJson( repoDbPath )
+  .then( obj => {
+    db = obj;
+  })
+  .catch( err => {
+    console.error(err);
     process.exit(255);
-  }
-}));
+  })
+})
+
 
 // express settings
 app.use(bodyParser.json());
