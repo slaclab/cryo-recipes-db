@@ -76,31 +76,37 @@ app.get('/api/papers.json', (req, res) => {
 var create_pr = ( branchName, newdb ) => {
 
 	var dir = path.resolve( '/tmp/' + branchName );
-	// duplicate master
-	rmdir( dir );
-	fse.copySync( repoPath, dir );
-	console.log("creating new branch " + branchName + " at " + dir );
-	
-	process.chdir(dir);
-	exec( "git checkout -b " + branchName );
-	const newdbPath = dir + '/' + dbPath;
-	var d = fs.createWriteStream(newdbPath)
-  d.on( 'finish', () => {
-    // commit changes
-    exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
-    exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
-    // hmm.. need different auth for hub
-    // exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
-    // create PR
-    // rmdir( dir );
-  });
-  d.on("error", (err) => {
-    console.error(err);
-  });
-  d.write( JSON.stringify(newdb, null, 2) );
-  d.end();
 
-	process.chdir( repoPath );
+  return new Promise( (resolve,reject) => {
+
+  	// duplicate master
+	  rmdir( dir );
+	  fse.copySync( repoPath, dir );
+	  console.log("creating new branch " + branchName + " at " + dir );
+	
+	  process.chdir(dir);
+	  exec( "git checkout -b " + branchName );
+	  const newdbPath = dir + '/' + dbPath;
+	  var d = fs.createWriteStream(newdbPath)
+    d.on( 'finish', () => {
+      // commit changes
+      exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
+      exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
+      // hmm.. need different auth for hub
+      // exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
+      // create PR
+      // rmdir( dir );
+    });
+    d.on("error", (err) => {
+      console.error(err);
+      reject(err);
+    });
+    d.write( JSON.stringify(newdb, null, 2) );
+    d.end();
+
+	  process.chdir( repoPath );
+    resolve( newdb );
+  })
 }
 
 // add new paper 
@@ -114,10 +120,13 @@ app.put('/api/paper/new', (req, res) => {
 
 	// create new branch
 	var branchName = 'new';
-	create_pr( branchName, db2 );
-	
-	// clean up
-	res.status(200).send(item);
+	var pr_promise = create_pr( branchName, db2 )
+  .then( (d) => {
+	  res.status(200).send(item);
+  })
+	.catch( (err) => {
+    res.status(500)
+  });
 
 })
 
