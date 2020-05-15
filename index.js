@@ -82,38 +82,55 @@ var submitPR = ( branchName, newdb ) => {
   return new Promise( (resolve,reject) => {
 
     // duplicate master
-    rmdir( dir );
-    fse.copySync( repoPath, dir );
-    console.log("creating new branch " + branchName + " at " + dir );
-  
-    process.chdir(dir);
-    exec( "git checkout -b " + branchName );
-    const newdbPath = dir + '/' + dbPath;
-    var d = fs.createWriteStream(newdbPath)
-    d.on( 'finish', () => {
-      // commit changes
-      exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
-      exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
-      // hmm.. need different auth for hub
-      // exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
-      // create PR
-      // rmdir( dir );
-    });
-    d.on("error", (err) => {
-      console.error(err);
-      reject(err);
-    });
-    d.write( JSON.stringify(newdb, null, 2) );
-    d.end();
+    fse.remove( dir )
+    .then( () => {
+      fse.copy( repoPath, dir )
+      .then( () => {
+    
+        console.log("creating new branch " + branchName + " at " + dir );
+        process.chdir(dir);
 
-    process.chdir( repoPath );
-    resolve( newdb );
+        exec( "git checkout -b " + branchName );
+        const newdbPath = dir + '/' + dbPath;
+        fse.writeJson( newdbPath, newdb, {spaces: 2} )
+        .then( () => {
+          // commit changes
+          exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
+          exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
+          // hmm.. need different auth for hub
+          // exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
+          // create PR
+          // rmdir( dir );
+
+          process.chdir( repoPath );
+          resolve( newdb );
+
+        })
+        .catch( err => {
+          console.error(err);
+          reject(err);
+        });
+        
+      })
+      .catch( err => {
+        console.error(err);
+        reject(err);
+      })
+
+    })
+    .catch( err => {
+      console.log(err);
+      reject(err);
+    })
+    
   })
+
 }
 
 // add new paper 
 app.put('/api/paper/new', (req, res) => {
   const item = req.body;
+  console.log("PUT new paper:")
   console.log(item);
   
   // copy
