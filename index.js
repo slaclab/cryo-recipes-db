@@ -145,7 +145,7 @@ app.put('/api/paper/new', (req, res) => {
     res.status(200).send(item);
   })
   .catch( (err) => {
-    res.status(500)
+    res.status(500);
   });
 
 })
@@ -156,7 +156,7 @@ app.get('/api/paper/:id', (req, res) => {
   res.send(db[id]);
 })
 
-
+// modifications for existing paper
 app.post( '/api/paper/:id', (req, res) => {
 
   var id = req.params.id;
@@ -166,10 +166,13 @@ app.post( '/api/paper/:id', (req, res) => {
   db2[id] = req.body;
 
   var branchName = 'mod-' + id;
-  var pr_promise = submitPR( branchName, db2 );
-
-  // clean up
-  res.status(200).send(db2[id]);
+  var pr_promise = submitPR( branchName, db2 )
+  .then( (d) => {
+    res.status(200).send(db2[id]);
+  })
+  .catch( (err) => {
+    res.status(500);
+  })
 
 })
 
