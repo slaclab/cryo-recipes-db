@@ -162,7 +162,9 @@ app.get('/api/paper/:id', (req, res) => {
 app.post( '/api/paper/:id', (req, res) => {
 
   var id = req.params.id;
-
+  console.log("POST existing paper " + id + ":" );
+  console.log(item);
+  
   // modify entry
   var db2 = JSON.parse( JSON.stringify(db) );
   db2[id] = req.body;
