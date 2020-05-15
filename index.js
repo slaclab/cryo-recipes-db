@@ -100,10 +100,11 @@ var submitPR = ( branchName, newdb ) => {
           // hmm.. need different auth for hub
           // exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
           // create PR
-          // rmdir( dir );
-
           process.chdir( repoPath );
-          resolve( newdb );
+          fse.remove( repoPath )
+          .catch( err => {
+            reject(err);
+          });
 
         })
         .catch( err => {
