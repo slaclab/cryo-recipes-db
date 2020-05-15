@@ -66,8 +66,11 @@ app.get('/status', (req,res) => {
 
 // list all papers
 app.get('/api/papers.json', (req, res) => {
-  // console.log( papersData );
-  res.send( db );
+  if( db == null ) {
+    res.status(404)
+  } else {
+    res.send( db );
+  }
 })
 
 
