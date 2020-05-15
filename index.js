@@ -19,6 +19,12 @@ const repoUrl = "git@github.com:slaclab/cryo-recipes-db.git";
 const repoPath = "/tmp/master/";
 const dbPath = 'data/papers.json';
 
+// express settings
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
+
 // set the ssh key to use
 console.log( "Using "  + process.env.GIT_SSH_COMMAND );
 exec( "git --version" );
@@ -35,6 +41,13 @@ fse.remove( repoPath )
   fse.readJson( repoDbPath )
   .then( obj => {
     db = obj;
+    // start server
+    app.listen(config.port, config.host, (err)=> {
+      if(err) {
+        throw new Error('Could not start server.');
+      }
+      console.log("Ready...")
+    });
   })
   .catch( err => {
     console.error(err);
@@ -42,22 +55,7 @@ fse.remove( repoPath )
   })
 })
 
-
-// express settings
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-
-
-// start server
-app.listen(config.port, config.host, (e)=> {
-  if(e) {
-    throw new Error('Internal Server Error');
-  }
-  console.log("Ready...")
-});
-
-
+// liviness check
 app.get('/status', (req,res) => {
   res.send('ok!');
 })
