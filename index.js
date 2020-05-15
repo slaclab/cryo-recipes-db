@@ -94,6 +94,9 @@ var create_pr = ( branchName, newdb ) => {
     // create PR
     // rmdir( dir );
   });
+  d.on("error", (err) => {
+    console.error(err);
+  });
   d.write( JSON.stringify(newdb, null, 2) );
   d.end();
 
