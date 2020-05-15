@@ -75,7 +75,7 @@ app.get('/api/papers.json', (req, res) => {
 
 
 
-var create_pr = ( branchName, newdb ) => {
+var submitPR = ( branchName, newdb ) => {
 
   var dir = path.resolve( '/tmp/' + branchName );
 
@@ -122,7 +122,7 @@ app.put('/api/paper/new', (req, res) => {
 
   // create new branch
   var branchName = 'new';
-  var pr_promise = create_pr( branchName, db2 )
+  var pr_promise = submitPR( branchName, db2 )
   .then( (d) => {
     res.status(200).send(item);
   })
@@ -148,7 +148,7 @@ app.post( '/api/paper/:id', (req, res) => {
   db2[id] = req.body;
 
   var branchName = 'mod-' + id;
-  create_pr( branchName, db2 );
+  var pr_promise = submitPR( branchName, db2 );
 
   // clean up
   res.status(200).send(db2[id]);
