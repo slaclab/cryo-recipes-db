@@ -1,4 +1,4 @@
-TAG=20200514.0
+TAG=20200514.1
 
 docker:
 	sudo docker build . -t slaclab/cryo-recipes-db:${TAG}

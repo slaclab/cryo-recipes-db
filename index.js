@@ -99,6 +99,9 @@ app.listen(config.port, config.host, (e)=> {
 });
 
 
+app.get('/status', (req,res) => {
+  res.send('ok!');
+})
 
 // list all papers
 app.get('/api/papers.json', (req, res) => {
@@ -119,18 +122,19 @@ var create_pr = ( branchName, newdb ) => {
 	process.chdir(dir);
 	exec( "git checkout -b " + branchName );
 	const newdbPath = dir + '/' + dbPath;
-	fs.createWriteStream(newdbPath).write( JSON.stringify(newdb, null, 2) );
+	var d = fs.createWriteStream(newdbPath)
+  d.on( 'finish', () => {
+    // commit changes
+    exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
+    exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
+    // hmm.. need different auth for hub
+    // exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
+    // create PR
+    // rmdir( dir );
+  });
+  d.write( JSON.stringify(newdb, null, 2) )
 
-	// commit changes
-  exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
-	exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
-	// hmm.. need different auth for hub
-	// exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
-
-	// create PR
 	process.chdir( repoPath );
-	// rmdir( dir );
-
 }
 
 // add new paper 
