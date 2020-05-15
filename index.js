@@ -27,10 +27,10 @@ exec( "git --version" );
 
 // helper functions
 var rmdir = ( dir ) => {
-	// console.log( 'removing ' + dir );
-	fs.rmdirSync( dir, {recursive:true}, (err) => {
-		if (err) { console.error(err); }
-	})	
+  // console.log( 'removing ' + dir );
+  fs.rmdirSync( dir, {recursive:true}, (err) => {
+    if (err) { console.error(err); }
+  })  
 };
 
 // grab newest db from repoUrl and read into memory
@@ -40,7 +40,7 @@ rmdir( repoPath );
 exec( "git clone " + repoUrl + " " + repoPath);
 const repoDbPath = repoPath + dbPath;
 const db = JSON.parse(fs.readFileSync( repoDbPath, 'utf8', (err) => {
-	if (err) { 
+  if (err) { 
     console.err(err); 
     process.exit(255);
   }
@@ -67,27 +67,27 @@ app.get('/status', (req,res) => {
 
 // list all papers
 app.get('/api/papers.json', (req, res) => {
-	// console.log( papersData );
-	res.send( db );
+  // console.log( papersData );
+  res.send( db );
 })
 
 
 
 var create_pr = ( branchName, newdb ) => {
 
-	var dir = path.resolve( '/tmp/' + branchName );
+  var dir = path.resolve( '/tmp/' + branchName );
 
   return new Promise( (resolve,reject) => {
 
-  	// duplicate master
-	  rmdir( dir );
-	  fse.copySync( repoPath, dir );
-	  console.log("creating new branch " + branchName + " at " + dir );
-	
-	  process.chdir(dir);
-	  exec( "git checkout -b " + branchName );
-	  const newdbPath = dir + '/' + dbPath;
-	  var d = fs.createWriteStream(newdbPath)
+    // duplicate master
+    rmdir( dir );
+    fse.copySync( repoPath, dir );
+    console.log("creating new branch " + branchName + " at " + dir );
+  
+    process.chdir(dir);
+    exec( "git checkout -b " + branchName );
+    const newdbPath = dir + '/' + dbPath;
+    var d = fs.createWriteStream(newdbPath)
     d.on( 'finish', () => {
       // commit changes
       exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
@@ -104,27 +104,27 @@ var create_pr = ( branchName, newdb ) => {
     d.write( JSON.stringify(newdb, null, 2) );
     d.end();
 
-	  process.chdir( repoPath );
+    process.chdir( repoPath );
     resolve( newdb );
   })
 }
 
 // add new paper 
 app.put('/api/paper/new', (req, res) => {
-	const item = req.body;
-	console.log(item);
-	
-	// copy
-	db2 = JSON.parse( JSON.stringify(db) );
-	db2.push( item );
+  const item = req.body;
+  console.log(item);
+  
+  // copy
+  db2 = JSON.parse( JSON.stringify(db) );
+  db2.push( item );
 
-	// create new branch
-	var branchName = 'new';
-	var pr_promise = create_pr( branchName, db2 )
+  // create new branch
+  var branchName = 'new';
+  var pr_promise = create_pr( branchName, db2 )
   .then( (d) => {
-	  res.status(200).send(item);
+    res.status(200).send(item);
   })
-	.catch( (err) => {
+  .catch( (err) => {
     res.status(500)
   });
 
@@ -132,24 +132,24 @@ app.put('/api/paper/new', (req, res) => {
 
 // get single paper
 app.get('/api/paper/:id', (req, res) => {
-	const id = req.params.id;
-	res.send(db[id]);
+  const id = req.params.id;
+  res.send(db[id]);
 })
 
 
 app.post( '/api/paper/:id', (req, res) => {
 
-	var id = req.params.id;
+  var id = req.params.id;
 
-	// modify entry
-	var db2 = JSON.parse( JSON.stringify(db) );
-	db2[id] = req.body;
+  // modify entry
+  var db2 = JSON.parse( JSON.stringify(db) );
+  db2[id] = req.body;
 
-	var branchName = 'mod-' + id;
-	create_pr( branchName, db2 );
+  var branchName = 'mod-' + id;
+  create_pr( branchName, db2 );
 
-	// clean up
-	res.status(200).send(db2[id]);
+  // clean up
+  res.status(200).send(db2[id]);
 
 })
 
