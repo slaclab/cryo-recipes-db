@@ -97,11 +97,13 @@ var submitPR = ( branchName, newdb ) => {
           // commit changes
           exec( 'git config user.name "author" && git config user.email "author@somewhere.org"' );
           exec( "git commit -m 'new entry request' . && git push -u origin " + branchName );
+          // create PR
           // hmm.. need different auth for hub
           // exec( "hub pull-request -m 'new entry request' -b cryo-recipes:" + branchName + " -h cryo-recipes:master");
-          // create PR
           process.chdir( repoPath );
-          fse.remove( repoPath )
+          resolve( newdb );
+          // cleanup
+          fse.remove( dir )
           .catch( err => {
             reject(err);
           });
