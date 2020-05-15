@@ -57,7 +57,11 @@ fse.remove( repoPath )
 
 // liviness check
 app.get('/status', (req,res) => {
-  res.send('ok!');
+  if( db == null ){
+    res.status(404);
+  } else {
+    res.send('ok!');
+  }
 })
 
 // list all papers
