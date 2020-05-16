@@ -9061,5 +9061,245 @@
       "stabilizer_exchange": "-"
     },
     "gene": "EMPTY"
+  },
+
+  {
+  "grid_preparation": {
+  "grid_protein_concentration": 3,
+  "details": "UltrAuFoil Au R 1.2/1.3 300",
+  "comments": "Blot force 6, 6 sec"
+  },
+  "helices_tmd_oligomer": 28,
+  "id": 0,
+  "monomer": 96,
+  "publication": {
+  "emdb": 4618,
+  "doi": "10.1126/sciadv.aax1803",
+  "pdb": "6QQ5",
+  "year_published": 2019
+  },
+  "oligomer": 2,
+  "type": "Oxidoreductase",
+  "affinity_tag_cleavage": "-",
+  "particle_size": 192,
+  "imaging_conditions": {
+  "frame_duration": 0.3,
+  "total_dose": 65,
+  "vpp": "No",
+  "symmetry_applied": "C2",
+  "resolution": 3.9,
+  "super_resolution": "No",
+  "cs_corrector": "No",
+  "final_number_particles": "56,134",
+  "total_number_images": 3213,
+  "keV": 300,
+  "detector": "K2",
+  "energy_filter": "Yes",
+  "total_exposure_time": 12,
+  "pixel_size": 1.07,
+  "software": "RELION 3.0"
+  },
+  "native_source": "Achromobacter xylosoxidans",
+  "final_stabilizer": "Decyl-thio-maltoside (DTM)",
+  "in_complex_with": "-",
+  "monomer_tmd_helices": 28,
+  "name": "quinol dependent Nitric Oxide Reductase (qNOR)",
+  "notes": "Apocytochrome b562 (BRIL) fused to qNOR C-terminus",
+  "sample_preparation": {
+  "affinity_tag_terminus": "His-6",
+  "expression_organism": "E. coli C41",
+  "extraction_parameters": "1 h, 4 deg",
+  "composition_of_final_stabilizer": "DTM",
+  "extraction_concentration": "1 %",
+  "final_concentration_or_ratio": "0.05 %",
+  "initial_purification": "HisTrap",
+  "final_purification": "Superdex 200 10/300",
+  "purification_details": "HisTrap purification in DDM, then size
+  exclusion with DTM",
+  "extraction_method": "DDM",
+  "stabilizer_exchange": "Yes"
+  },
+  "gene": "NorZ"
+  },
+
+  {
+  "grid_preparation": {
+  "grid_protein_concentration": 5,
+  "details": "UltrAuFoil Cu R 1.2/1.3 300",
+  "comments": "Blot force 6, 6 sec"
+  },
+  "helices_tmd_oligomer": 28,
+  "id": 0,
+  "monomer": 96,
+  "publication": {
+  "emdb": 4619,
+  "doi": "10.1126/sciadv.aax1803",
+  "pdb": "6QQ6",
+  "year_published": 2019
+  },
+  "oligomer": 2,
+  "type": "Oxidoreductase",
+  "affinity_tag_cleavage": "-",
+  "particle_size": 192,
+  "imaging_conditions": {
+  "frame_duration": 0.25,
+  "total_dose": 49,
+  "vpp": "No",
+  "symmetry_applied": "C2",
+  "resolution": 3.3,
+  "super_resolution": "No",
+  "cs_corrector": "No",
+  "final_number_particles": "227,000",
+  "total_number_images": 1803,
+  "keV": 300,
+  "detector": "K2",
+  "energy_filter": "Yes",
+  "total_exposure_time": 10,
+  "pixel_size": 1.05,
+  "software": "RELION 3.0"
+  },
+  "native_source": "Achromobacter xylosoxidans",
+  "final_stabilizer": "Decyl-thio-maltoside (DTM)",
+  "in_complex_with": "-",
+  "monomer_tmd_helices": 28,
+  "name": "quinol dependent Nitric Oxide Reductase (qNOR)",
+  "notes": "Apocytochrome b562 (BRIL) fused to qNOR C-terminus, structure
+  of Val494Ala mutant",
+  "sample_preparation": {
+  "affinity_tag_terminus": "His-6",
+  "expression_organism": "E. coli C41",
+  "extraction_parameters": "1 h, 4 deg",
+  "composition_of_final_stabilizer": "DTM",
+  "extraction_concentration": "1 %",
+  "final_concentration_or_ratio": "0.05 %",
+  "initial_purification": "HisTrap",
+  "final_purification": "Superdex 200 10/300",
+  "purification_details": "HisTrap purification in DDM, then size
+  exclusion with DTM",
+  "extraction_method": "DDM",
+  "stabilizer_exchange": "Yes"
+  },
+  "gene": "NorZ"
+  },
+
+
+  {
+  "grid_preparation": {
+  "grid_protein_concentration": 4,
+  "details": "UltrAuFoil Cu R 1.2/1.3 300",
+  "comments": "Blot force 6, 6 sec"
+  },
+  "helices_tmd_oligomer": 28,
+  "id": 0,
+  "monomer": 101,
+  "publication": {
+  "emdb": 0822,
+  "doi": "10.1107/S2052252520003656",
+  "pdb": "6L3H",
+  "year_published": 2020
+  },
+  "oligomer": 2,
+  "type": "Oxidoreductase",
+  "affinity_tag_cleavage": "Yes, 3C Protease",
+  "particle_size": 202,
+  "imaging_conditions": {
+  "frame_duration": 0.2,
+  "total_dose": 69,
+  "vpp": "No",
+  "symmetry_applied": "C2",
+  "resolution": 3.0,
+  "super_resolution": "No",
+  "cs_corrector": "No",
+  "final_number_particles": "233,556",
+  "total_number_images": 3182,
+  "keV": 300,
+  "detector": "K2",
+  "energy_filter": "Yes",
+  "total_exposure_time": 8,
+  "pixel_size": 1.07,
+  "software": "RELION 3.0"
+  },
+  "native_source": "Neisseria meningitidis",
+  "final_stabilizer": "Decyl-thio-maltoside (DTM)",
+  "in_complex_with": "-",
+  "monomer_tmd_helices": 28,
+  "name": "quinol dependent Nitric Oxide Reductase (qNOR)",
+  "notes": "Apocytochrome b562 (BRIL) fused to qNOR C-terminus",
+  "sample_preparation": {
+  "affinity_tag_terminus": "His-6",
+  "expression_organism": "E. coli C43",
+  "extraction_parameters": "1 h, 4 deg",
+  "composition_of_final_stabilizer": "DTM",
+  "extraction_concentration": "1 %",
+  "final_concentration_or_ratio": "0.05 %",
+  "initial_purification": "HisTrap",
+  "final_purification": "HiLoad Superdex 200 26/600",
+  "purification_details": "HisTrap purification in DDM, His-tag cleavage
+  with 3C protease, then size exclusion with DTM",
+  "extraction_method": "DDM",
+  "stabilizer_exchange": "Yes"
+  },
+  "gene": "NorZ"
+  },
+
+  {
+  "grid_preparation": {
+  "grid_protein_concentration": 3,
+  "details": "UltrAuFoil Cu R 1.2/1.3 300",
+  "comments": "Blot force 6, 6 sec"
+  },
+  "helices_tmd_oligomer": 14,
+  "id": 0,
+  "monomer": 96,
+  "publication": {
+  "emdb": 10387,
+  "doi": "10.1107/S2052252520003656",
+  "pdb": "6T6V",
+  "year_published": 2020
+  },
+  "oligomer": 1,
+  "type": "Oxidoreductase",
+  "affinity_tag_cleavage": "-",
+  "particle_size": 96,
+  "imaging_conditions": {
+  "frame_duration": 0.3,
+  "total_dose": 56,
+  "vpp": "No",
+  "symmetry_applied": "C1",
+  "resolution": 4.5,
+  "super_resolution": "No",
+  "cs_corrector": "No",
+  "final_number_particles": "144,000",
+  "total_number_images": 2239,
+  "keV": 300,
+  "detector": "K2",
+  "energy_filter": "Yes",
+  "total_exposure_time": 12,
+  "pixel_size": 1.043,
+  "software": "RELION 3.0"
+  },
+  "native_source": "Achromobacter xylosoxidans",
+  "final_stabilizer": "Decyl-thio-maltoside (DTM)",
+  "in_complex_with": "-",
+  "monomer_tmd_helices": 28,
+  "name": "quinol dependent Nitric Oxide Reductase (qNOR)",
+  "notes": "Apocytochrome b562 (BRIL) fused to qNOR C-terminus, structure
+  of Glu494Ala mutant",
+  "sample_preparation": {
+  "affinity_tag_terminus": "His-6",
+  "expression_organism": "E. coli C41",
+  "extraction_parameters": "1 h, 4 deg",
+  "composition_of_final_stabilizer": "DTM",
+  "extraction_concentration": "1 %",
+  "final_concentration_or_ratio": "0.05 %",
+  "initial_purification": "HisTrap",
+  "final_purification": "Superdex 200 10/300",
+  "purification_details": "HisTrap purification in DDM, then size
+  exclusion with DTM",
+  "extraction_method": "DDM",
+  "stabilizer_exchange": "Yes"
+  },
+  "gene": "NorZ"
   }
+
 ]
